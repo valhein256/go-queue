@@ -1,5 +1,12 @@
 # go-queue
 
+這邊用了兩種方式, 實作 queue
+一個是 傳統資料結構
+另一個是 使用 golang channel 實作
+
+golang channel 最後會印出錯誤, 本程式碼 先專注於 queue 的實作, 
+而有關 channel 的 error handling, 會在 go-channel 另行介紹處理
+
 ## build
 
 ```shell
