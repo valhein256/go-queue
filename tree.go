@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Node struct {
 	value int
 	left  *Node
@@ -50,13 +52,27 @@ func (n *Node) search(value int) int {
 	}
 }
 
-func printTree(n *Node) {
+func printTree(n *Node, sort_type string) {
 	if n == nil {
 		return
 	}
-	printTree(n.left)
-	println(n.value)
-	printTree(n.right)
+	switch sort_type {
+	case "ascending":
+		printTree(n.left, sort_type)
+		println(n.value)
+		printTree(n.right, sort_type)
+		break
+	case "descending":
+		printTree(n.right, sort_type)
+		println(n.value)
+		printTree(n.left, sort_type)
+		break
+	default:
+		println(n.value)
+		printTree(n.left, sort_type)
+		printTree(n.right, sort_type)
+		break
+	}
 }
 
 func main() {
@@ -68,8 +84,20 @@ func main() {
 	t.insert(3)
 	t.insert(7)
 	t.insert(23)
-	printTree(t.node)
+	println("ascending")
+	printTree(t.node, "ascending")
+	println("descending")
+	printTree(t.node, "descending")
+	println("default")
+	printTree(t.node, "")
+	println()
 
-	println(t.node.search(10))
-	println(t.node.search(12))
+	for i := 1; i <= 10; i++ {
+		r := t.node.search(i)
+		if r > 0 {
+			fmt.Printf("%d is existed in Tree\n", i)
+		} else {
+			fmt.Printf("%d is not existed in Tree\n", i)
+		}
+	}
 }

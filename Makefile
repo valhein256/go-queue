@@ -1,8 +1,10 @@
 SERVICE := go
 STAGE := stg
 PLATFORM := local
+WORKSPACE := /opt/go
+APP := ${WORKSPACE}/tree.go
 
-.PHONY: build devenv update clean
+.PHONY: build run devenv update clean
 
 build: clean
 	@echo "Start building..."
@@ -10,6 +12,12 @@ build: clean
 		--platform ${PLATFORM} \
 		--build-arg TAG=${STAGE} \
 		--target release --output bin/
+
+run:
+	@docker run \
+		-v ${PWD}:${WORKSPACE} \
+		--rm -it golang:1-buster \
+		go run ${APP}
 
 devenv:
 	@docker run \
