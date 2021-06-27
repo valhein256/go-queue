@@ -30,6 +30,7 @@ type Tree struct {
 
 func (t *Tree) insert(value int) {
 	if t.node == nil {
+		println("insert first item to tree", value)
 		t.node = &Node{value: value}
 	} else {
 		t.node.insert(value)
