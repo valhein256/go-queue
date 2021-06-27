@@ -10,45 +10,44 @@ type Tree struct {
 	node *Node
 }
 
-func (t *Tree) Insert(value int) *Tree {
+func (t *Tree) insert(value int) {
 	if t.node == nil {
 		t.node = &Node{value: value}
 	} else {
-		t.node.Insert(value)
+		t.node.insert(value)
 	}
-	return t
 }
 
-func (n *Node) Insert(value int) {
+func (n *Node) insert(value int) {
 	if value <= n.value {
 		if n.left == nil {
 			n.left = &Node{value: value}
 		} else {
-			n.left.Insert(value)
+			n.left.insert(value)
 		}
 	} else {
 		if n.right == nil {
 			n.right = &Node{value: value}
 		} else {
-			n.right.Insert(value)
+			n.right.insert(value)
 		}
 	}
 }
 
-func printNode(n *Node) {
+func printTree(n *Node) {
 	if n == nil {
 		return
 	}
-	printNode(n.left)
+	printTree(n.left)
 	println(n.value)
-	printNode(n.right)
+	printTree(n.right)
 }
 
 func main() {
 	t := &Tree{}
-	t.Insert(10)
-	t.Insert(3)
-	t.Insert(7)
-	t.Insert(17)
-	printNode(t.node)
+	t.insert(10)
+	t.insert(3)
+	t.insert(7)
+	t.insert(23)
+	printTree(t.node)
 }
